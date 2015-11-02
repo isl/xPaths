@@ -8,16 +8,18 @@
     <packaging>war</packaging>
 
     <name>SourceAnalyzer</name>
-
+    <licenses>
+        <license>
+            <name>EUPL v.1.1</name>
+            <url>http://ec.europa.eu/idabc/eupl</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <repositories>
-        <!--        <repository>
-            <id>jboss</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public</url>
-        </repository>-->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
