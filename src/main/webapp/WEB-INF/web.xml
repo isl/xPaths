@@ -39,7 +39,7 @@ This file is part of the SourceAnalyzer webapp.
     </context-param>
     <context-param>
         <param-name>resteasy.resources</param-name>
-        <param-value>webservice.XPathsWebservice</param-value>
+        <param-value>gr.forth.ics.isl.webservice.XPathsWebservice</param-value>
     </context-param>
     <listener>
         <listener-class>

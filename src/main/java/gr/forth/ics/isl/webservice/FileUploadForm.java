@@ -25,60 +25,33 @@
  *
  * This file is part of the SourceAnalyzer webapp.
  */
-package webservice;
+package gr.forth.ics.isl.webservice;
 
-import java.util.LinkedHashSet;
-import java.util.Map;
+import javax.ws.rs.FormParam;
 
-/**
- * Class that holds the paths from the XML
- * @author jagathan
- *
- */
-public class XPaths {
+import org.jboss.resteasy.annotations.providers.multipart.PartType;
+
+public class FileUploadForm {
+
+	private byte[] fileData;
+	private String fileName;
 	
-	private LinkedHashSet<Map<String,String>> path; //HashSet that holds the paths in the JSON format we want
-	
-	private String error; //String that holds the error that occurs
-	
-	/**
-	 * Default constructor
-	 */
-	public XPaths(){
-		this.path = new LinkedHashSet<Map<String,String>>();
-		error = "";
+	public String getFileName() {
+	    return fileName;
 	}
 	
-	/**
-	 * Sets class member path
-	 * @param path
-	 */
-	public void setResult(LinkedHashSet<Map<String,String>> path){
-		this.path = path;
+	@FormParam("fileName")
+	public void setFileName(String fileName) {
+	    this.fileName = fileName;
 	}
 	
-	/**
-	 * Returns class member path
-	 * @return
-	 */
-	public LinkedHashSet<Map<String,String>> getResults(){
-		return this.path;
+	public byte[] getFileData() {
+	    return fileData;
 	}
 	
-	/**
-	 * Setter for class member error
-	 * @param error
-	 */
-	public void setError(String error){
-		this.error = error;
+	@FormParam("selectedFile")
+	@PartType("application/octet-stream")
+	public void setFileData(byte[] fileData) {
+	    this.fileData = fileData;
 	}
-	
-	/**
-	 * getter for class member error
-	 * @return
-	 */
-	public String getError(){
-		return this.error;
-	}
-	
 }

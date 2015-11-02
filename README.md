@@ -30,7 +30,8 @@ SourceAnalyzer
 SourceAnalyzer is a webapp providing RESTful web services to analyze xml files (xml or xsd) and obtain all available xpaths.
 
 ## Build - Deploy - Run
-Folders src, web and lib contain all the files needed to build the web app and create a war file.
+This project is a Maven project, providing all the libs in pom.xml.
+Folders src, web contain all the files needed to build the web app and create a war file.
 You may use any application server that supports war files. (Has been tested with Apache Tomcat versions 5,6,7,8).
 
 ## Configuration

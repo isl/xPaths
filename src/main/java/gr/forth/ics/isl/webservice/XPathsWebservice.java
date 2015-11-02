@@ -25,8 +25,9 @@
  *
  * This file is part of the SourceAnalyzer webapp.
  */
-package webservice;
+package gr.forth.ics.isl.webservice;
 
+import gr.forth.ics.isl.xmlparse.XmlPaths;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -61,7 +62,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.xml.sax.SAXException;
 import schemareader.SchemaFile;
 
-import xmlparse.XmlPaths;
+
 
 /**
  * Web Service class

@@ -25,7 +25,7 @@
  *
  * This file is part of the SourceAnalyzer webapp.
  */
-package xmlparse;
+package gr.forth.ics.isl.xmlparse;
 
 import java.io.BufferedReader;
 import java.io.File;
