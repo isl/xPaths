@@ -60,4 +60,9 @@ This file is part of the SourceAnalyzer webapp.
         <servlet-name>restEASY WebApp</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+     <session-config>
+        <session-timeout>
+            5
+        </session-timeout>
+    </session-config>
 </web-app>
