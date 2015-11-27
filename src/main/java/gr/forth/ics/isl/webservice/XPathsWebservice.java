@@ -135,10 +135,8 @@ public class XPathsWebservice {
             return Response.status(400).entity(error).build(); //status ERROR
         }
 
-        System.out.println("FILEPATH=" + fileName);
-        System.out.println(getHomePath(fileName));
+    
         if (fileName.endsWith(".xsd")) {
-            System.out.println(new File(getHomePath(fileName) + "../xml_schema/" + fileName.replace(".xsd", ".txt")).exists());
             if (new File(getHomePath(fileName) + "../xml_schema/" + fileName.replace(".xsd", ".txt")).exists() == false) {
                 try {
                     fileName = XSDToXML(fileName, root);
