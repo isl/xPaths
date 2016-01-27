@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Forth-ICS</groupId>
-    <artifactId>SourceAnalyzer</artifactId>
+    <artifactId>xPaths</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>SourceAnalyzer</name>
+    <name>xPaths</name>
     <licenses>
         <license>
             <name>EUPL v.1.1</name>

@@ -22,10 +22,10 @@ http://www.ics.forth.gr/isl
 
 Authors :  Giannis Agathangelos, Georgios Samaritakis.
 
-This file is part of the SourceAnalyzer webapp.
+This file is part of the xPaths webapp.
 
 -------------------------------
-SourceAnalyzer project dependencies
+xPaths project dependencies
 -------------------------------
 jars :
 

@@ -23,7 +23,7 @@
  *
  * Authors :  Giannis Agathangelos, Georgios Samaritakis.
  *
- * This file is part of the SourceAnalyzer webapp.
+ * This file is part of the xPaths webapp.
  */
 package gr.forth.ics.isl.xmlparse;
 
@@ -166,9 +166,8 @@ public class XmlPaths {
         Document doc = dBuilder.parse(xmlFile);
 
         Element root = doc.getDocumentElement();
-        String rootTag = root.getTagName();
+        String rootTag = "/" + root.getTagName();//added / for root
         this.paths.add(rootTag);	//adds root tag in the list
-
         NodeList kids = root.getChildNodes();	//get child nodes from root
 
         //For each child of root find all possible paths

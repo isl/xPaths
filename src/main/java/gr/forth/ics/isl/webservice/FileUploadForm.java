@@ -23,7 +23,7 @@
  *
  * Authors :  Giannis Agathangelos, Georgios Samaritakis.
  *
- * This file is part of the SourceAnalyzer webapp.
+ * This file is part of the xPaths webapp.
  */
 package gr.forth.ics.isl.webservice;
 
