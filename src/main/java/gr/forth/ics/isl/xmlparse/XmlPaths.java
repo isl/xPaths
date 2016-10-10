@@ -43,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
@@ -185,7 +186,7 @@ public class XmlPaths {
 
     /**
      * walks recursively through every path of the listOfNodes and adds each
-     * path to the pathList
+     * path (including attributes) to the pathList
      *
      * @param listOfNodes
      * @param tags
@@ -196,6 +197,14 @@ public class XmlPaths {
                 String tagPath = tags + "/" + listOfNodes.item(i).getNodeName();
                 this.paths.add(tagPath);
 
+                NamedNodeMap attrs = listOfNodes.item(i).getAttributes();
+
+                if (attrs.getLength() > 0) {//added support for attributes
+                    String elementPath = tagPath;
+                    for (int j = 0; j < attrs.getLength(); j++) {
+                        this.paths.add(elementPath + "/@" + attrs.item(j).getNodeName());
+                    }
+                }
                 if (listOfNodes.item(i).getChildNodes().getLength() >= 1) {
                     processChildNode(listOfNodes.item(i).getChildNodes(), tagPath);
                 }
