@@ -36,6 +36,9 @@ This file is part of the xPaths webapp.
     <context-param>
         <param-name>AppHome</param-name>
         <param-value>C:/Projects/3M/uploads/Mapping</param-value>
+        <!--Linux path
+        <param-value>/usr/share/3M/uploads/Mapping/</param-value>
+        -->
     </context-param>
     <context-param>
         <param-name>resteasy.resources</param-name>
