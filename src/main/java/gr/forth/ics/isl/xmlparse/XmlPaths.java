@@ -44,6 +44,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
@@ -168,7 +169,10 @@ public class XmlPaths {
 
         Element root = doc.getDocumentElement();
         String rootTag = "/" + root.getTagName();//added / for root
+
         this.paths.add(rootTag);	//adds root tag in the list
+        addAttributesXpaths(root, rootTag);
+
         NodeList kids = root.getChildNodes();	//get child nodes from root
 
         //For each child of root find all possible paths
@@ -177,6 +181,9 @@ public class XmlPaths {
             if (kids.item(i) instanceof Element) {
                 nextTag = rootTag + "/" + kids.item(i).getNodeName();
                 this.paths.add(nextTag);
+
+                addAttributesXpaths(kids.item(i), nextTag);
+
                 processChildNode(kids.item(i).getChildNodes(), nextTag);
             }
         }
@@ -197,19 +204,23 @@ public class XmlPaths {
                 String tagPath = tags + "/" + listOfNodes.item(i).getNodeName();
                 this.paths.add(tagPath);
 
-                NamedNodeMap attrs = listOfNodes.item(i).getAttributes();
+                addAttributesXpaths(listOfNodes.item(i), tagPath);
 
-                if (attrs.getLength() > 0) {//added support for attributes
-                    String elementPath = tagPath;
-                    for (int j = 0; j < attrs.getLength(); j++) {
-                        this.paths.add(elementPath + "/@" + attrs.item(j).getNodeName());
-                    }
-                }
                 if (listOfNodes.item(i).getChildNodes().getLength() >= 1) {
                     processChildNode(listOfNodes.item(i).getChildNodes(), tagPath);
                 }
             } else if (listOfNodes.item(i) instanceof Text && listOfNodes.getLength() == 1) {
                 return;
+            }
+        }
+    }
+
+    private void addAttributesXpaths(Node elem, String elemPath) {
+        NamedNodeMap attrs = elem.getAttributes();
+        if (attrs.getLength() > 0) {//added support for attributes
+            String elementPath = elemPath;
+            for (int j = 0; j < attrs.getLength(); j++) {
+                this.paths.add(elementPath + "/@" + attrs.item(j).getNodeName());
             }
         }
     }
