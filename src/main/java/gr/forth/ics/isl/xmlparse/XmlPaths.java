@@ -29,9 +29,11 @@ package gr.forth.ics.isl.xmlparse;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
@@ -136,7 +138,9 @@ public class XmlPaths {
         }
         try {
             fr = new FileReader(this.fileName);
-            BufferedReader buffer = new BufferedReader(fr);
+
+//            BufferedReader buffer = new BufferedReader(fr);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(this.fileName), "UTF8"));
             String line;
             while ((line = buffer.readLine()) != null) {
                 this.paths.add(line);

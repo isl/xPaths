@@ -43,7 +43,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -120,13 +119,28 @@ public class XPathsWebservice {
      * Parses the file in filePath location Returns OK the XML Paths in JSON
      * when everything is done
      *
-     * @param filePath
      * @return
      */
     @POST
     @Path("/filePathService")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response fileNameParse(@FormParam("fileName") String fileName, @FormParam("root") String root) {
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+//    public Response fileNameParse(@FormParam("fileName") String fileName, @FormParam("root") String root) {
+    public Response fileNameParse(String requestBody) {
+        String[] params = requestBody.split("&");
+        String fileName = "";
+        String root = "";
+
+        for (String param : params) {
+            if (param.startsWith("fileName=")) {
+                fileName = param.substring(9);
+            }
+            if (param.startsWith("root=")) {
+                root = param.substring(5);
+            }
+
+        }
+
         XPaths xPaths;
 
         if (!fileName.endsWith(".xml") && !fileName.endsWith(".xsd")) { //type error handling
@@ -135,7 +149,6 @@ public class XPathsWebservice {
             return Response.status(400).entity(error).build(); //status ERROR
         }
 
-    
         if (fileName.endsWith(".xsd")) {
             if (new File(getHomePath(fileName) + "../xml_schema/" + fileName.replace(".xsd", ".txt")).exists() == false) {
                 try {
@@ -172,7 +185,8 @@ public class XPathsWebservice {
     @Path("/filePathServiceGet")
     @Produces(MediaType.APPLICATION_JSON)
     public Response fileNameParseGet(@QueryParam("fileName") String fileName, @QueryParam("root") String root) {
-        return fileNameParse(fileName, root);
+//        return fileNameParse(fileName, root);
+        return fileNameParse("fileName=" + fileName + "&root=" + root);
     }
 
     /**
@@ -209,7 +223,7 @@ public class XPathsWebservice {
         } else {
             pathValue = pathValue + FS + "example_files";
         }
-        return pathValue+FS;
+        return pathValue + FS;
     }
 
     /**
@@ -255,7 +269,6 @@ public class XPathsWebservice {
         path = getHomePath(fileName);
         xmlPaths.setFilePath(path);
         xmlPaths.setFileName(fileName.substring(fileName.indexOf(System.getProperty("file.separator")) + 1, fileName.lastIndexOf('.')));
-
         if (xmlPaths.getPaths().isEmpty()) //if the file has not been uploaded before	
         {
             xmlPaths.ParseXMLFile(path + fileName); //Parse the XML in the filePath
