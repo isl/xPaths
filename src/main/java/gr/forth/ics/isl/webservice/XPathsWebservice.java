@@ -34,11 +34,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -140,9 +145,16 @@ public class XPathsWebservice {
             }
 
         }
+       
+        try {//Athina's issue            
+            fileName = URLDecoder.decode(fileName, StandardCharsets.UTF_8.toString());
+            root = URLDecoder.decode(root, StandardCharsets.UTF_8.toString());
 
+        } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
+        }
         XPaths xPaths;
-
+       
         if (!fileName.endsWith(".xml") && !fileName.endsWith(".xsd")) { //type error handling
             XPaths error = new XPaths();
             error.setError("Invalid file type. Only xml or xsd files allowed");
@@ -267,10 +279,13 @@ public class XPathsWebservice {
         XPaths xPaths = new XPaths();	//creates object to be returned
 
         path = getHomePath(fileName);
+        System.out.println(path);
         xmlPaths.setFilePath(path);
         xmlPaths.setFileName(fileName.substring(fileName.indexOf(System.getProperty("file.separator")) + 1, fileName.lastIndexOf('.')));
         if (xmlPaths.getPaths().isEmpty()) //if the file has not been uploaded before	
         {
+            System.out.println("----");
+            System.out.println(path + fileName);
             xmlPaths.ParseXMLFile(path + fileName); //Parse the XML in the filePath
         }
         xPaths.setResult(FormatHashSet(xmlPaths.getPaths()));
